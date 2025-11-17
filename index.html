@@ -1,0 +1,196 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E-Commerce Dashboard</title>
+
+    <!-- CSS links -->
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body class="theme-default">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="#">E-Commerce Analytics</a>
+
+        <div class="d-flex gap-2 align-items-center">
+          <select id="theme-selector" class="form-select form-select-sm">
+            <option value="default">Default</option>
+            <option value="dark">Dark</option>
+            <option value="sunset">Sunset</option>
+            <option value="forest">Forest</option>
+            <option value="image">Image</option>
+            <option value="futuristic">Futuristic</option>
+          </select>
+
+          <button id="reload-summary" class="btn btn-sm btn-light">Refresh</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="container mt-4">
+
+      <!-- File uploads -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h6>Upload Sales CSV</h6>
+            <input id="sales-file" type="file" accept=".csv" class="form-control mb-2">
+            <button id="upload-sales" class="btn btn-primary btn-sm">Upload Sales</button>
+            <p id="sales-upload-msg" class="mt-2 small"></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h6>Upload Products CSV</h6>
+            <input id="products-file" type="file" accept=".csv" class="form-control mb-2">
+            <button id="upload-products" class="btn btn-primary btn-sm">Upload Products</button>
+            <p id="products-upload-msg" class="mt-2 small"></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h6>Upload Customers CSV</h6>
+            <input id="customers-file" type="file" accept=".csv" class="form-control mb-2">
+            <button id="upload-customers" class="btn btn-primary btn-sm">Upload Customers</button>
+            <p id="customers-upload-msg" class="mt-2 small"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top summary cards -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card p-3 metric">
+            <h6>Total Sales</h6>
+            <h3 id="total-sales">-</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 metric">
+            <h6>Total Orders</h6>
+            <h3 id="total-orders">-</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 metric">
+            <h6>Total Customers</h6>
+            <h3 id="total-customers">-</h3>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card p-3 metric">
+            <h6>Forecast Trend</h6>
+            <h5 id="forecast-trend">-</h5>
+            <small id="forecast-analysis"></small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales forecast + top products -->
+      <div class="row mt-4">
+        <div class="col-md-8">
+          <div class="card p-3">
+            <h5>Sales: Actual and Forecast</h5>
+            <canvas id="sales-chart"></canvas>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>Top Products</h5>
+            <ul id="top-products" class="list-unstyled"></ul>
+            <hr>
+            <h6>Product Forecast (Top 5)</h6>
+            <ul id="product-predictions" class="list-unstyled small"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Segments + Monthly Sales -->
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h5>Customer Segments</h5>
+            <canvas id="segments-chart"></canvas>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h5>Monthly Sales</h5>
+            <canvas id="monthly-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer + Product Forms -->
+      <div class="row mt-4">
+        <!-- Customer Details -->
+        <div class="col-md-6">
+          <div class="card p-4 customer-form-card">
+            <h5>Customer Details</h5>
+
+            <form id="customer-form">
+              <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" name="name" required>
+
+              <label class="form-label mt-2">Email</label>
+              <input type="email" class="form-control" name="email" required>
+
+              <label class="form-label mt-2">Phone Number</label>
+              <input type="text" class="form-control" name="phone" required>
+
+              <label class="form-label mt-2">Address</label>
+              <textarea class="form-control" name="address" required></textarea>
+
+              <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+
+            <p id="form-success" class="text-success mt-2" style="display:none;"></p>
+          </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+          <div class="card p-4 customer-form-card">
+            <h5>Product Purchase Details</h5>
+
+            <form id="product-form">
+              <label class="form-label">Product Name</label>
+              <input type="text" class="form-control" name="pname" required>
+
+              <label class="form-label mt-2">Quantity</label>
+              <input type="number" class="form-control" name="qty" required>
+
+              <label class="form-label mt-2">Price (₹)</label>
+              <input type="number" class="form-control" name="price" required>
+
+              <button type="submit" class="btn btn-success mt-3">Add Product</button>
+            </form>
+
+            <p id="product-success" class="text-success mt-2" style="display:none;"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations / Written Analysis -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card p-3">
+            <h5>AI Analysis & Recommendations</h5>
+            <div id="ai-analysis" class="small"></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

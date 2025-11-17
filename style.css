@@ -1,0 +1,162 @@
+/* ===============================
+   GLOBAL DEFAULT STYLES
+================================= */
+:root {
+  --bg-main: linear-gradient(to bottom right, #eef4ff, #dce8ff);
+  --card-bg: #ffffff;
+  --navbar-bg: #0d6efd;
+  --text-dark: #000;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-main);
+  margin: 0;
+  padding: 0;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.navbar {
+  background: var(--navbar-bg);
+  color: white;
+  padding: 12px 0;
+  transition: background 0.4s ease;
+}
+
+.navbar .navbar-brand {
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card {
+  border-radius: 8px;
+  background: var(--card-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+}
+
+.metric { text-align:center; }
+.metric h6 { color: #666; font-size:14px; }
+.metric h3 { margin-top:8px; color:var(--text-dark); transition: color 0.4s ease; }
+
+canvas { width:100% !important; height:300px !important; }
+
+input, select, textarea { border-radius:6px !important; }
+
+/* ===============================================
+   THEME SYSTEM — ALL THEMES BELOW
+   These classes are applied to <body>
+=============================================== */
+
+/* ======================
+   DEFAULT THEME
+====================== */
+.theme-default {
+  background: linear-gradient(to bottom right, #eef4ff, #dce8ff);
+  color: black;
+}
+.theme-default .navbar {
+  background: #0d6efd;
+}
+.theme-default .card {
+  background: white;
+  color: black;
+}
+
+/* ======================
+   DARK THEME
+====================== */
+.theme-dark {
+  background-color: #121212 !important;
+  color: white !important;
+}
+.theme-dark .navbar {
+  background: #1f1f1f !important;
+}
+.theme-dark .card {
+  background: #1f1f1f !important;
+  color: white !important;
+}
+.theme-dark h3, .theme-dark h6, .theme-dark h5 {
+  color: white !important;
+}
+
+/* ======================
+   SUNSET THEME
+====================== */
+.theme-sunset {
+  background: linear-gradient(120deg, #ff9966, #ff5e62) !important;
+  color: white !important;
+}
+.theme-sunset .navbar {
+  background: rgba(0,0,0,0.2);
+}
+.theme-sunset .card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(5px);
+  color: white;
+}
+.theme-sunset h3, .theme-sunset h6, .theme-sunset h5 {
+  color: white !important;
+}
+
+/* ======================
+   FOREST THEME
+====================== */
+.theme-forest {
+  background: linear-gradient(120deg, #0f9b0f, #000000) !important;
+  color: white !important;
+}
+.theme-forest .navbar {
+  background: rgba(0,0,0,0.35);
+}
+.theme-forest .card {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+.theme-forest h3, .theme-forest h6, .theme-forest h5 {
+  color: white !important;
+}
+
+/* ======================
+   FUTURISTIC THEME
+====================== */
+.theme-futuristic {
+  background: linear-gradient(135deg, #020611, #091027, #0b1d3a) !important;
+  color: #e6f1ff !important;
+}
+.theme-futuristic .navbar {
+  background: linear-gradient(90deg, #00aaff, #0077ff);
+  box-shadow: 0 0 25px rgba(0, 150, 255, 0.7);
+}
+.theme-futuristic .card {
+  background: rgba(20, 40, 80, 0.35);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 170, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.4);
+  color: #e6f1ff;
+}
+.theme-futuristic h3, .theme-futuristic h6, .theme-futuristic h5 {
+  color: #e6f1ff !important;
+}
+
+/* ======================
+   IMAGE THEME
+====================== */
+.theme-image {
+  background: url("../images/background.jpg") no-repeat center center fixed !important;
+  background-size: cover !important;
+  color: white !important;
+}
+.theme-image .navbar {
+  background: rgba(0,0,0,0.4);
+}
+.theme-image .card {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  backdrop-filter: blur(6px);
+}
+.theme-image h3, .theme-image h6, .theme-image h5 {
+  color: white !important;
+}
